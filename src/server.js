@@ -16,10 +16,13 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 // socket = 연결 된 브라우저
-function handleConnection(socket) {
-  console.log(socket);
-}
-
-wss.on("connection", handleConnection);
+wss.on("connection", (socket) => {
+  console.log("Connected to Browser ✅");
+  socket.on("close", () => console.log("Disconnected from the Browser ❌"));
+  socket.on("message", (message) => {
+    console.log(message.toString());
+  });
+  socket.send("Hello!!!");
+});
 
 server.listen(3000, handleListen);
