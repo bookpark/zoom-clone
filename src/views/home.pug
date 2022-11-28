@@ -11,18 +11,15 @@ html(lang="en")
             h1 Coco
         main
             div#welcome
-
                 form
-                    input(placeholder="방 제목", required, type="text")
+                    input#roomName(placeholder="방 제목", required, type="text")
+                    input#nickName(placeholder="닉네임", required, type="text")
                     button 입장 
                 h4 열린 방:
                 ul
             div#room
                 h3
                 ul
-                form#name
-                    input(placeholder="닉네임", required, type="text")
-                    button 저장 
                 form#msg
                     input(placeholder="메시지", required, type="text")
                     button 보내기

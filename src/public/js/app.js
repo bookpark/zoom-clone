@@ -6,7 +6,7 @@ const room = document.getElementById("room");
 
 room.hidden = true;
 
-let roomName;
+let roomName, nickName;
 
 function addMessage(message) {
   const ul = room.querySelector("ul");
@@ -25,12 +25,12 @@ function handleMessageSubmit(event) {
   input.value = "";
 }
 
-function handleNicknnameSubmit(event) {
-  event.preventDefault();
-  const input = room.querySelector("#name input");
-  socket.emit("nickname", input.value);
-  input.value = "";
-}
+// function handleNicknameSubmit(event) {
+//   event.preventDefault();
+//   const input = room.querySelector("#name input");
+//   socket.emit("nickname", input.value);
+//   input.value = "";
+// }
 
 function showRoom(newCount) {
   welcome.hidden = true;
@@ -38,18 +38,25 @@ function showRoom(newCount) {
   const h3 = room.querySelector("h3");
   h3.innerText = `Room ${roomName} (${newCount})`;
   const msgForm = room.querySelector("#msg");
-  const nameForm = room.querySelector("#name");
   msgForm.addEventListener("submit", handleMessageSubmit);
-  nameForm.addEventListener("submit", handleNicknnameSubmit);
 }
 
 function handleRoomSubmit(event) {
   event.preventDefault();
-  const input = form.querySelector("input");
-  // emit ( eventname, js object(object뿐만 아닌 string, number, boolean 등등 다 보낼수있음), function은 무조건 마지막 )
-  socket.emit("enter_room", input.value, showRoom);
-  roomName = input.value;
-  input.value = "";
+  // const input = form.querySelector("input");
+  // // emit ( eventname, js object(object뿐만 아닌 string, number, boolean 등등 다 보낼수있음), function은 무조건 마지막 )
+  // socket.emit("enter_room", input.value, showRoom);
+  // roomName = input.value;
+  // input.value = "";
+  const inputRoomName = form.querySelector("#roomName");
+  const inputNickName = form.querySelector("#nickName");
+
+  roomName = inputRoomName.value;
+  nickName = inputNickName.value;
+
+  socket.emit("enter_room", roomName, nickName, showRoom);
+  inputRoomName.value = "";
+  inputNickName.value = "";
 }
 
 form.addEventListener("submit", handleRoomSubmit);
