@@ -92,5 +92,13 @@ wsServer.on("connection", (socket) => {
 //   });
 // });
 
+wsServer.on("connection", (socket) => {
+  socket.on("join_room", (vRoomName, done) => {
+    socket.join(vRoomName);
+    done();
+    socket.to(vRoomName).emit("welcomeV");
+  });
+});
+
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
 httpServer.listen(3000, handleListen);

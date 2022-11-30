@@ -10,11 +10,16 @@ html(lang="en")
         header
             h1 Coco
         main
-            div#myStream
-                video#myFace(autoplay,playsinline, width="400", height="400")
-                button#mute 음소거
-                button#camera 카메라 끄기
-                select#cameras
+            div#welcomeV
+                form
+                    input(placeholder="화상회의 방 제목", required, type="text")
+                    button 화상회의 입장
+            div#call
+                div#myStream
+                    video#myFace(autoplay,playsinline, width="400", height="400")
+                    button#mute 음소거
+                    button#camera 카메라 끄기
+                    select#cameras
             div#welcome
                 form
                     input#roomName(placeholder="방 제목", required, type="text")

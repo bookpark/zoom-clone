@@ -9,9 +9,14 @@ const muteBtn = document.getElementById("mute");
 const cameraBtn = document.getElementById("camera");
 const camerasSelect = document.getElementById("cameras");
 
+const call = document.getElementById("call");
+
+call.hidden = true;
+
 let myStream;
 let muted = false;
 let cameraOff = false;
+let vRoomName;
 
 async function getCameras() {
   try {
@@ -90,6 +95,36 @@ muteBtn.addEventListener("click", handleMuteClick);
 cameraBtn.addEventListener("click", handleCameraClick);
 camerasSelect.addEventListener("input", handleCameraChange);
 
+// WelcomeV Form...
+const welcomeV = document.getElementById("welcomeV");
+const welcomeForm = welcomeV.querySelector("form");
+
+function startMedia() {
+  welcomeV.hidden = true;
+  call.hidden = false;
+  getMedia();
+}
+
+function handleWelcomeVSubmit(event) {
+  event.preventDefault();
+  const input = welcomeForm.querySelector("input");
+  socket.emit("join_room", input.value, startMedia);
+  vRoomName = input.value;
+  input.value = "";
+}
+
+welcomeForm.addEventListener("submit", handleWelcomeVSubmit);
+// WelcomeV Form end...
+
+// Socket code
+
+socket.on("welcomeV", () => {
+  console.log("누군가 입장했습니다.")
+})
+
+// Socket end...
+
+
 room.hidden = true;
 
 let roomName, nickName;
@@ -110,6 +145,7 @@ function handleMessageSubmit(event) {
   });
   input.value = "";
 }
+
 
 // function handleNicknameSubmit(event) {
 //   event.preventDefault();
