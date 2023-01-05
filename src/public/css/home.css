@@ -1,0 +1,34 @@
+main {
+    padding-top: 10px;
+}
+
+#room {
+    /* display: flex; */
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 800px;
+}
+
+#msgInput {
+    display: absolute;
+    /* margin-top: 500px; */
+}
+
+#msgButton {
+    width: 120px;
+}
+
+#myStream {
+    display: flex;
+    align-items: center;
+}
+
+select {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style-type: none;
+}

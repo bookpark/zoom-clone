@@ -6,32 +6,39 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Coco
         link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
-    body 
-        header
-            h1 Coco
-        main
-            div#welcomeV
-                form
-                    input(placeholder="화상회의 방 제목", required, type="text")
-                    button 화상회의 입장
-            div#call
-                div#myStream
-                    video#myFace(autoplay,playsinline, width="400", height="400")
-                    button#mute 음소거
-                    button#camera 카메라 끄기
-                    select#cameras
-            div#welcome
-                form
-                    input#roomName(placeholder="방 제목", required, type="text")
-                    input#nickName(placeholder="닉네임", required, type="text")
-                    button 입장 
-                h4 방 목록:
-                ul
-            div#room
-                h3
-                ul
-                form#msg
-                    input(placeholder="메시지", required, type="text")
-                    button 보내기
+        link(rel="stylesheet", href="/public/css/home.css")
+        link(rel="stylesheet", href="/bootstrap/bootstrap.css")
+
+
+        body 
+            //- header
+                //- h1 Coco
+            main
+                div#welcomeV
+                    form
+                        input(placeholder="화상회의 방 제목", required, type="text")
+                        button 화상회의 입장
+                div#call.col-8
+                    video#peerFace(autoplay,playsinline, width="800", height="520")
+                    div#myStream
+                        video#myFace(autoplay,playsinline, width="200", height="170")
+                        select#cameras
+                        button#screenShareButton(onclick="shareScreen()") 화면공유
+                        button#mute 음소거
+                        button#camera 카메라 끄기
+                div#welcome
+                    form
+                        input#roomName(placeholder="방 제목", required, type="text")
+                        input#nickName(placeholder="닉네임", required, type="text")
+                        button 입장 
+                    //- h4 방 목록:
+                    ul
+                div#room
+                    h3
+                    ul
+                    form#msg
+                        input#msgInput(placeholder="메시지", required, type="text")
+                        button#msgButton 보내기
+
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
